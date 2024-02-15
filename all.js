@@ -84,6 +84,13 @@ document.addEventListener('keyup',(event)=>{
 DisplayValue=DisplayValue.toLowerCase();
 const key=event.key;
 
+if(key==='Escape'){
+    hideElementByID('playground');
+    ShowElementById('end');
+    const score=getDisplayValue('score');
+    SetValueById('LastScore',score)
+}
+
 if(key===DisplayValue){
     continueGame();
     removeBackGroundColor(DisplayValue);
@@ -101,6 +108,9 @@ const UpdateLife=life-1;
 if(UpdateLife===0){
     hideElementByID('playground');
     ShowElementById('end');
+  const score=getDisplayValue('score');
+  SetValueById('LastScore',score)
+
 }
 SetValueById('life',UpdateLife);
 }
