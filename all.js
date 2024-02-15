@@ -27,7 +27,6 @@ function continueGame(){
 const alphabet=randomAlphabet();
 SetValueById('Display',alphabet);
 setBackgroundColor(alphabet);
-Playing()
 
 
 
@@ -64,30 +63,48 @@ function setBackgroundColor(id){
 
 
 }
-function removeBackGroundColor(){}
+function removeBackGroundColor(id){
+    const element=getElementId(id);
+    element.style.background='';
+}
 
 function getDisplayValue(id){
     const DisplayValue=document.getElementById(id).innerText;
     return DisplayValue;
 }
 
-function Playing(){
 
 
-let DisplayValue=getDisplayValue('Display');
-DisplayValue=DisplayValue.toLowerCase();
+
 
 
 document.addEventListener('keyup',(event)=>{
+
+ let DisplayValue=getDisplayValue('Display');
+DisplayValue=DisplayValue.toLowerCase();
 const key=event.key;
 
 if(key===DisplayValue){
     continueGame();
-
+    removeBackGroundColor(DisplayValue);
+    let score=getDisplayValue('score');
+    score=parseInt(score)
+    const UpdateScore=score+1;
+    SetValueById('score',UpdateScore);
 }
 
+else{
 
-
+   let life=getDisplayValue('life');
+life=parseInt(life);
+const UpdateLife=life-1;
+if(UpdateLife===0){
+    hideElementByID('playground');
+    ShowElementById('end');
+}
+SetValueById('life',UpdateLife);
+}
 })
 
-}
+
+
